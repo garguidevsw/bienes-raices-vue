@@ -12,11 +12,21 @@ import { RouterView } from 'vue-router'
       <v-app-bar
         color="blue-darken-1"
       >
-        <template v-slot:append>
-          <h1>Bienes Raices</h1>
-        </template>
         <template v-slot:prepend>
-          <h1>Bienes Raices</h1>
+          <v-btn
+            :to="{name: 'home'}"
+          >
+            Bienes Raices | VueFire
+          </v-btn>
+        </template>
+
+        <template v-slot:append>
+          <v-btn :to="{name: 'home'}">
+            Inicio
+          </v-btn>
+          <v-btn :to="{name: 'login'}">
+            Iniciar Sesión
+          </v-btn>
         </template>
       </v-app-bar>
 
