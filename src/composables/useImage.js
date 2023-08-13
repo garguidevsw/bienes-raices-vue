@@ -11,8 +11,7 @@ export default function useImage() {
 
   const {
     url,
-    upload,
-    uploadError,
+    upload
   } = useStorageFile(storageRefPath)
 
   function uploadImage(e) {
@@ -21,7 +20,6 @@ export default function useImage() {
 
     if(data){
       upload(data)
-      console.log(uploadError);
     }
   }
 
