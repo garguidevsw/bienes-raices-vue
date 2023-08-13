@@ -2,6 +2,7 @@
 import { useRouter } from "vue-router";
 import { useFirestore } from "vuefire";
 import { collection, addDoc } from "firebase/firestore";
+
 import { useForm, useField } from "vee-validate";
 
 import "leaflet/dist/leaflet.css";
@@ -22,8 +23,7 @@ const { uploadImage, image, url } = useImage();
 const { handleSubmit } = useForm({
   validationSchema: {
     ...validationSchema,
-    ...imageSchema,
-    ubicacion: center.value
+    ...imageSchema
   },
 });
 
@@ -41,11 +41,12 @@ const alberca = useField("alberca", null, {
 const submit = handleSubmit(async (values) => {
   const { imagen, ...propiedad } = values;
 
-  console.log(imagen);
+  console.log(imagen)
 
   const docRef = await addDoc(collection(db, "propiedades"), {
     ...propiedad,
     imagen: url.value,
+    ubicacion: center.value
   });
 
   if (docRef.id) {
