@@ -1,22 +1,22 @@
+import { ref, computed } from 'vue';
 import { collection } from 'firebase/firestore';
-import { computed } from 'vue';
 import { useFirestore, useCollection } from 'vuefire'
 
 export default function usePropiedades() {
 
+  const alberca = ref(false)
+
   const db = useFirestore()
   const propiedadesCollection = useCollection(collection(db, 'propiedades'))
 
-  const formatearPrecio = computed(() => {
-    return (precio) => 
-      Number(precio).toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      })
+  const propiedadesFiltradas = computed(() => {
+    return alberca.value 
+    ? propiedadesCollection.value.filter( propiedad => propiedad.alberca)
+    : propiedadesCollection.value
   })
-
   return {
     propiedadesCollection,
-    formatearPrecio
+    alberca,
+    propiedadesFiltradas
   }
 }
